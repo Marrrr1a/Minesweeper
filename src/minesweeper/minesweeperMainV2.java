@@ -1,10 +1,10 @@
 package minesweeper;
 
-public class minesweeperMain {
+public class minesweeperMainV2 {
     public static void main(String[] args) {
         long startTime = System.nanoTime();
 
-        MinefieldGenerator newField = new MinefieldGenerator();
+        MinefieldGeneratorV2 newField = new MinefieldGeneratorV2();
         newField.generateMinefield(50,50,10);
 
         long endTime = System.nanoTime();

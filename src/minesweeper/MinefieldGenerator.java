@@ -2,7 +2,7 @@ package minesweeper;
 
 import java.util.Random;
 
-public class minefieldGenerator {
+public class MinefieldGenerator {
 
     public char [][] generateMinefield (int width, int height, int minesCount){
         char [][] mineField = new char[height][width];
@@ -12,7 +12,6 @@ public class minefieldGenerator {
             throw new IllegalArgumentException("Количество мин на поле не должно быть больше/равно количеству клеток поля");
         }
 
-        char mine = '*';
         Random random = new Random();
         int i = 0;
 
@@ -20,19 +19,19 @@ public class minefieldGenerator {
             int y = random.nextInt(mineField.length);
             int x = random.nextInt(mineField[0].length);
 
-            if (mineField[y][x] != mine) {
-                mineField[y][x] = mine;
+            if (mineField[y][x] != MinefieldGenerator.MINE) {
+                mineField[y][x] = MinefieldGenerator.MINE;
                 i++;
             }
         }
 
         for (int y = 0; y < mineField.length; y++) {
             for (int x = 0; x < mineField[y].length; x++) {
-                if (mineField [y][x] != mine){
+                if (mineField [y][x] != MinefieldGenerator.MINE){
                     int counter = counterOfMinesAround(mineField, y, x, height, width);
                     mineField [y][x] = (char) (counter + '0');
                     if (counter == 0){
-                        mineField [y][x] = '█';
+                        mineField [y][x] = MinefieldGenerator.EMPTY_CELL;
                     }
                 }
                 System.out.print(mineField[y][x] + " ");
@@ -41,6 +40,9 @@ public class minefieldGenerator {
         }
         return mineField;
     }
+
+    private static final char MINE = '*';
+    private static final char EMPTY_CELL = '█';
 
     /**
      * Метод для подсчёта мин в радиусе 1 клетки от текущей
