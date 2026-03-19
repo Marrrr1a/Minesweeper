@@ -84,7 +84,7 @@ public class MinefieldGeneratorV3 {
                         newField[y][x] = MinefieldGeneratorV3.EMPTY_CELL;
                     }
                 }
-                System.out.print(newField[y][x] + " ");
+                System.out.print(newField[y][x] + " "); // Давай логирование результатов тоже вынесем в отдельный метод
             }
             System.out.println();
         }
@@ -94,7 +94,7 @@ public class MinefieldGeneratorV3 {
     * Метод для подсчёта мин в радиусе 1 клетки от текущей
     * @return counter - возвращает количество мин вокруг клетки
     */
-    private int counterOfMinesAround ( char[][] mineField, int currentRow, int currentColumn, int height, int width) {
+    private int counterOfMinesAround ( char[][] mineField, int currentRow, int currentColumn, int height, int width) { // вместо int height, int width можно использовать mineField.length, mineField[0].length
         int counter = 0;
 
         for (int m = -1; m <= 1; m++) {
@@ -102,7 +102,7 @@ public class MinefieldGeneratorV3 {
                 int row = currentRow + m;
                 int column = currentColumn + n;
 
-                if (row >= 0 && row < height && column >= 0 && column < width && mineField[row][column] == '*') {
+                if (row >= 0 && row < height && column >= 0 && column < width && mineField[row][column] == '*') { // Подставим константу вместо литерала
                     counter++;
                 }
             }
