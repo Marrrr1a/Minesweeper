@@ -14,6 +14,7 @@ public class MinefieldGeneratorV3 {
         char[][] mineField = fieldCreation(width, height);
         minesRandomizer(mineField,minesCount);
         addNumbers(mineField);
+        printTheField(mineField);
 
         return mineField;
     }
@@ -69,22 +70,30 @@ public class MinefieldGeneratorV3 {
     }
 
     /**
-     * Метод для добавления на поле цифер (либо символа '█') в зависимости от количества мин в радиусе 1 клетки от текущей
+     * Метод для добавления на поле цифр (либо символа '█') в зависимости от количества мин в радиусе 1 клетки от текущей
      */
     private void addNumbers (char [][] newField){
-        int height = newField.length;
-        int width = newField[0].length;
 
         for (int y = 0; y < newField.length; y++) {
             for (int x = 0; x < newField[y].length; x++) {
                 if (newField[y][x] != MinefieldGeneratorV3.MINE) {
-                    int counter = counterOfMinesAround(newField, y, x, height, width);
+                    int counter = counterOfMinesAround(newField, y, x);
                     newField[y][x] = (char) (counter + '0');
                     if (counter == 0) {
                         newField[y][x] = MinefieldGeneratorV3.EMPTY_CELL;
                     }
                 }
-                System.out.print(newField[y][x] + " ");
+            }
+        }
+    }
+
+    /**
+     * Метод для вывода поля в консоль
+     */
+    private void printTheField (char [][] printableField){
+        for (int y = 0; y < printableField.length; y++) {
+            for (int x = 0; x < printableField[y].length; x++) {
+                System.out.print(printableField[y][x] + " ");
             }
             System.out.println();
         }
@@ -94,7 +103,9 @@ public class MinefieldGeneratorV3 {
     * Метод для подсчёта мин в радиусе 1 клетки от текущей
     * @return counter - возвращает количество мин вокруг клетки
     */
-    private int counterOfMinesAround ( char[][] mineField, int currentRow, int currentColumn, int height, int width) {
+    private int counterOfMinesAround ( char[][] mineField, int currentRow, int currentColumn) {
+        int height = mineField.length;
+        int width = mineField[0].length;
         int counter = 0;
 
         for (int m = -1; m <= 1; m++) {
@@ -102,7 +113,7 @@ public class MinefieldGeneratorV3 {
                 int row = currentRow + m;
                 int column = currentColumn + n;
 
-                if (row >= 0 && row < height && column >= 0 && column < width && mineField[row][column] == '*') {
+                if (row >= 0 && row < height && column >= 0 && column < width && mineField[row][column] == MinefieldGeneratorV3.MINE) {
                     counter++;
                 }
             }

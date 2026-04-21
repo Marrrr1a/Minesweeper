@@ -5,10 +5,10 @@ public class minesweeperMainV3 {
         long startTime = System.nanoTime();
 
         MinefieldGeneratorV3 newField = new MinefieldGeneratorV3();
-        newField.generateMinefield(50,50,10);
+        newField.generateMinefield(6,6,35);
 
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);
-        System.out.println("Время выполнения: " + duration);
+        System.out.println("Время выполнения: " + duration + " наносекунд");
     }
 }
